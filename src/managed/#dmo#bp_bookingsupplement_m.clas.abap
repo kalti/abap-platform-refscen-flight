@@ -1,8 +1,9 @@
 CLASS /dmo/bp_bookingsupplement_m DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF /dmo/i_travel_m.
+protected section.
+private section.
 ENDCLASS.
 
 
-CLASS /dmo/bp_bookingsupplement_m IMPLEMENTATION.
 
-
+CLASS /DMO/BP_BOOKINGSUPPLEMENT_M IMPLEMENTATION.
 ENDCLASS.

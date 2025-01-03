@@ -36,7 +36,15 @@ ENDCLASS.
 
 
 
-CLASS /dmo/cl_flight_data_generator IMPLEMENTATION.
+CLASS /DMO/CL_FLIGHT_DATA_GENERATOR IMPLEMENTATION.
+
+
+  METHOD calculate_flight_price.
+    rv_price = /dmo/cl_flight_legacy=>calculate_flight_price(
+                 iv_seats_occupied_percent = iv_seats_occupied_percent
+                 iv_flight_distance        = iv_flight_distance
+               ).
+  ENDMETHOD.
 
 
   METHOD if_oo_adt_classrun~main.
@@ -83,13 +91,6 @@ CLASS /dmo/cl_flight_data_generator IMPLEMENTATION.
     out->write( 'Finished Data Generation' ) ##NO_TEXT.
   ENDMETHOD.
 
-
-  METHOD calculate_flight_price.
-    rv_price = /dmo/cl_flight_legacy=>calculate_flight_price(
-                 iv_seats_occupied_percent = iv_seats_occupied_percent
-                 iv_flight_distance        = iv_flight_distance
-               ).
-  ENDMETHOD.
 
   METHOD reset_numberrange_interval.
 
@@ -192,5 +193,4 @@ CLASS /dmo/cl_flight_data_generator IMPLEMENTATION.
     ENDIF.
 
   ENDMETHOD.
-
 ENDCLASS.

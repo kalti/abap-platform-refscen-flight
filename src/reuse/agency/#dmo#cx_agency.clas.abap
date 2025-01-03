@@ -138,7 +138,8 @@ ENDCLASS.
 
 
 
-CLASS /dmo/cx_agency IMPLEMENTATION.
+CLASS /DMO/CX_AGENCY IMPLEMENTATION.
+
 
   METHOD constructor ##ADT_SUPPRESS_GENERATION.
     super->constructor( previous = previous ).
@@ -159,5 +160,4 @@ CLASS /dmo/cx_agency IMPLEMENTATION.
     ENDIF.
 
   ENDMETHOD.
-
 ENDCLASS.

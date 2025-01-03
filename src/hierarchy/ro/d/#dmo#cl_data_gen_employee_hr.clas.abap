@@ -13,7 +13,7 @@ ENDCLASS.
 
 
 
-CLASS /dmo/cl_data_gen_employee_hr IMPLEMENTATION.
+CLASS /DMO/CL_DATA_GEN_EMPLOYEE_HR IMPLEMENTATION.
 
 
   METHOD /dmo/if_data_generation_badi~data_generation.

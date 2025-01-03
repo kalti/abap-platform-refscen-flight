@@ -139,75 +139,26 @@ ENDCLASS.
 
 
 
-CLASS /dmo/tc_travel_m_bo_consumer IMPLEMENTATION.
-
-  method create_travel.
-
-  "This is a demo code under test and only includes the EML operation to be isolated.
-  "In actual scenario there will be additional business logic that forms the code to be tested.
-
-    modify entities of /dmo/i_travel_m
-     entity travel
-       create from travel
-     reported reported
-     failed failed
-     mapped mapped.
-
-  "This is a demo code under test and only includes the EML operation to be isolated.
-  "In actual scenario there will be additional business logic that forms the code to be tested.
-  endmethod.
-
-  method mod_eml_w_mult_ents_nd_ops.
-
-  "This is a demo code under test and only includes the EML operation to be isolated.
-  "In actual scenario there will be additional business logic that forms the code to be tested.
-
-    modify entities of /dmo/i_travel_m
-     entity travel
-       create from create_travel
-       create by \_Booking from create_ba_booking
-     entity booking
-       update from update_booking
-     reported reported
-     failed failed
-     mapped mapped.
-
-  "This is a demo code under test and only includes the EML operation to be isolated.
-  "In actual scenario there will be additional business logic that forms the code to be tested.
-  endmethod.
+CLASS /DMO/TC_TRAVEL_M_BO_CONSUMER IMPLEMENTATION.
 
 
-  method update_travel.
-  "This is a demo code under test and only includes the EML operation to be isolated.
-  "In actual scenario there will be additional business logic that forms the code to be tested.
-
-    modify entities of /dmo/i_travel_m
-     entity travel
-       update from travel
-     reported reported
-     failed failed
-     mapped mapped.
-
-  "This is a demo code under test and only includes the EML operation to be isolated.
-  "In actual scenario there will be additional business logic that forms the code to be tested.
-  endmethod.
-
-
-  method create_booking_by_assoc.
+  METHOD ACCEPT_TRAVEL_ACTION.
     "This is a demo code under test and only includes the EML operation to be isolated.
     "In actual scenario there will be additional business logic that forms the code to be tested.
 
-      modify entities of /dmo/i_travel_m
-       entity travel
-         create by \_Booking
-          from booking_by_travel
-       reported reported
-       failed failed
-       mapped mapped.
+     modify entities of /dmo/i_travel_m
+      entity travel
+       execute acceptTravel from accept_travel_input
+        result result
+        mapped mapped
+        failed failed
+        reported reported.
 
     "This is a demo code under test and only includes the EML operation to be isolated.
     "In actual scenario there will be additional business logic that forms the code to be tested.
-  endmethod.
+
+  ENDMETHOD.
+
 
   method create_ba_booking_for_travel_1.
     "This is a demo code under test and only includes the EML operation to be isolated.
@@ -224,6 +175,23 @@ CLASS /dmo/tc_travel_m_bo_consumer IMPLEMENTATION.
                                                   flight_date = cl_abap_context_info=>get_system_date( ) + 10 %control-Flight_Date = if_abap_behv=>mk-on
                                                   booking_date = cl_abap_context_info=>get_system_date( ) %control-booking_date = if_abap_behv=>mk-on
                                                   booking_status = 'B' %control-booking_status = if_abap_behv=>mk-on ) ) ) )
+       reported reported
+       failed failed
+       mapped mapped.
+
+    "This is a demo code under test and only includes the EML operation to be isolated.
+    "In actual scenario there will be additional business logic that forms the code to be tested.
+  endmethod.
+
+
+  method create_booking_by_assoc.
+    "This is a demo code under test and only includes the EML operation to be isolated.
+    "In actual scenario there will be additional business logic that forms the code to be tested.
+
+      modify entities of /dmo/i_travel_m
+       entity travel
+         create by \_Booking
+          from booking_by_travel
        reported reported
        failed failed
        mapped mapped.
@@ -276,6 +244,23 @@ CLASS /dmo/tc_travel_m_bo_consumer IMPLEMENTATION.
   endmethod.
 
 
+  method create_travel.
+
+  "This is a demo code under test and only includes the EML operation to be isolated.
+  "In actual scenario there will be additional business logic that forms the code to be tested.
+
+    modify entities of /dmo/i_travel_m
+     entity travel
+       create from travel
+     reported reported
+     failed failed
+     mapped mapped.
+
+  "This is a demo code under test and only includes the EML operation to be isolated.
+  "In actual scenario there will be additional business logic that forms the code to be tested.
+  endmethod.
+
+
   method deep_create_travel_bo.
     "This is a demo code under test and only includes the EML operation to be isolated.
     "In actual scenario there will be additional business logic that forms the code to be tested.
@@ -316,6 +301,42 @@ CLASS /dmo/tc_travel_m_bo_consumer IMPLEMENTATION.
   endmethod.
 
 
+  method delete_travel.
+    "This is a demo code under test and only includes the EML operation to be isolated.
+    "In actual scenario there will be additional business logic that forms the code to be tested.
+
+      modify entities of /dmo/i_travel_m
+       entity travel
+         delete from travel
+       reported reported
+       failed failed
+       mapped mapped.
+
+    "This is a demo code under test and only includes the EML operation to be isolated.
+    "In actual scenario there will be additional business logic that forms the code to be tested.
+  endmethod.
+
+
+  method mod_eml_w_mult_ents_nd_ops.
+
+  "This is a demo code under test and only includes the EML operation to be isolated.
+  "In actual scenario there will be additional business logic that forms the code to be tested.
+
+    modify entities of /dmo/i_travel_m
+     entity travel
+       create from create_travel
+       create by \_Booking from create_ba_booking
+     entity booking
+       update from update_booking
+     reported reported
+     failed failed
+     mapped mapped.
+
+  "This is a demo code under test and only includes the EML operation to be isolated.
+  "In actual scenario there will be additional business logic that forms the code to be tested.
+  endmethod.
+
+
   method read_booking_by_assoc.
     "This is a demo code under test and only includes the EML operation to be isolated.
     "In actual scenario there will be additional business logic that forms the code to be tested.
@@ -349,6 +370,7 @@ CLASS /dmo/tc_travel_m_bo_consumer IMPLEMENTATION.
     "In actual scenario there will be additional business logic that forms the code to be tested.
   endmethod.
 
+
   method read_travel_1.
     "This is a demo code under test and only includes the EML operation to be isolated.
     "In actual scenario there will be additional business logic that forms the code to be tested.
@@ -365,36 +387,19 @@ CLASS /dmo/tc_travel_m_bo_consumer IMPLEMENTATION.
     "In actual scenario there will be additional business logic that forms the code to be tested.
   endmethod.
 
-  method delete_travel.
-    "This is a demo code under test and only includes the EML operation to be isolated.
-    "In actual scenario there will be additional business logic that forms the code to be tested.
 
-      modify entities of /dmo/i_travel_m
-       entity travel
-         delete from travel
-       reported reported
-       failed failed
-       mapped mapped.
+  method update_travel.
+  "This is a demo code under test and only includes the EML operation to be isolated.
+  "In actual scenario there will be additional business logic that forms the code to be tested.
 
-    "This is a demo code under test and only includes the EML operation to be isolated.
-    "In actual scenario there will be additional business logic that forms the code to be tested.
+    modify entities of /dmo/i_travel_m
+     entity travel
+       update from travel
+     reported reported
+     failed failed
+     mapped mapped.
+
+  "This is a demo code under test and only includes the EML operation to be isolated.
+  "In actual scenario there will be additional business logic that forms the code to be tested.
   endmethod.
-
-  METHOD ACCEPT_TRAVEL_ACTION.
-    "This is a demo code under test and only includes the EML operation to be isolated.
-    "In actual scenario there will be additional business logic that forms the code to be tested.
-
-     modify entities of /dmo/i_travel_m
-      entity travel
-       execute acceptTravel from accept_travel_input
-        result result
-        mapped mapped
-        failed failed
-        reported reported.
-
-    "This is a demo code under test and only includes the EML operation to be isolated.
-    "In actual scenario there will be additional business logic that forms the code to be tested.
-
-  ENDMETHOD.
-
 ENDCLASS.

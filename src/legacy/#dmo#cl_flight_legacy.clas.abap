@@ -103,7 +103,14 @@ ENDCLASS.
 
 
 
-CLASS /dmo/cl_flight_legacy IMPLEMENTATION.
+CLASS /DMO/CL_FLIGHT_LEGACY IMPLEMENTATION.
+
+
+  METHOD adjust_numbers.
+    et_travel_mapping       = lcl_travel_buffer=>get_instance( )->adjust_numbers( ).
+    et_booking_mapping      = lcl_booking_buffer=>get_instance( )->adjust_numbers( et_travel_mapping ).
+    et_bookingsuppl_mapping = lcl_booking_supplement_buffer=>get_instance( )->adjust_numbers( et_booking_mapping ).
+  ENDMETHOD.
 
 
   METHOD calculate_flight_price.
@@ -327,12 +334,6 @@ CLASS /dmo/cl_flight_legacy IMPLEMENTATION.
 *   ENDIF.
   ENDMETHOD.
 
-
-  METHOD adjust_numbers.
-    et_travel_mapping       = lcl_travel_buffer=>get_instance( )->adjust_numbers( ).
-    et_booking_mapping      = lcl_booking_buffer=>get_instance( )->adjust_numbers( et_travel_mapping ).
-    et_bookingsuppl_mapping = lcl_booking_supplement_buffer=>get_instance( )->adjust_numbers( et_booking_mapping ).
-  ENDMETHOD.
 
   METHOD save.
     lcl_travel_buffer=>get_instance( )->save( ).

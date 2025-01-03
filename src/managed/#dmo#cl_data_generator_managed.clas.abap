@@ -13,7 +13,8 @@ ENDCLASS.
 
 
 
-CLASS /dmo/cl_data_generator_managed IMPLEMENTATION.
+CLASS /DMO/CL_DATA_GENERATOR_MANAGED IMPLEMENTATION.
+
 
   METHOD /dmo/if_data_generation_badi~data_generation.
 
@@ -105,5 +106,4 @@ CLASS /dmo/cl_data_generator_managed IMPLEMENTATION.
     INSERT /dmo/booksuppl_m FROM TABLE @lt_booksuppl_m.
 
   ENDMETHOD.
-
 ENDCLASS.

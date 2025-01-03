@@ -42,7 +42,10 @@ CLASS /dmo/tc_travel_proc_m_o2_odata DEFINITION
 
 ENDCLASS.
 
-CLASS /dmo/tc_travel_proc_m_o2_odata  IMPLEMENTATION.
+
+
+CLASS /DMO/TC_TRAVEL_PROC_M_O2_ODATA IMPLEMENTATION.
+
 
   METHOD class_setup.
 
@@ -80,25 +83,47 @@ CLASS /dmo/tc_travel_proc_m_o2_odata  IMPLEMENTATION.
 
   ENDMETHOD.
 
-  METHOD setup.
-    sql_test_environment->clear_doubles(  ).
-    cds_test_environment->clear_doubles(  ).
-    cds_test_environment->insert_test_data( agency_mock_data     ).
-    cds_test_environment->insert_test_data( customer_mock_data   ).
-    cds_test_environment->insert_test_data( carrier_mock_data    ).
-    sql_test_environment->insert_test_data( flight_mock_data     ).
-    sql_test_environment->insert_test_data( supplement_mock_data ).
-  ENDMETHOD.
-
-  METHOD teardown.
-    ROLLBACK ENTITIES. "#EC CI_ROLLBACK
-  ENDMETHOD.
 
   METHOD class_teardown.
     " remove test doubles
     cds_test_environment->destroy(  ).
     sql_test_environment->destroy(  ).
   ENDMETHOD.
+
+
+  METHOD create_local_client_proxy.
+
+    " as long as CL_WEB_ODATA_CLIENT_FACTORY is not available
+    " on all platforms, we have to use dynamic calls
+    " to avoid syntax errors
+    TRY.
+        " the Cloud version
+        DATA(class1) = 'CL_WEB_ODATA_CLIENT_FACTORY'.
+        CALL METHOD (class1)=>create_v2_local_proxy
+          EXPORTING
+            is_service_key  = service_key
+          RECEIVING
+            ro_client_proxy = client_proxy.
+      CATCH cx_root.  " cx_sy_dyn_call_illegal_class .
+    ENDTRY.
+
+    IF client_proxy IS NOT BOUND.
+      TRY.
+          " the onPrem version
+          DATA(class2) = '/IWBEP/CL_CP_CLIENT_PROXY_FACT'.
+          CALL METHOD (class2)=>create_v2_local_proxy
+            EXPORTING
+              is_service_key  = service_key
+            RECEIVING
+              ro_client_proxy = client_proxy.
+        CATCH cx_root.  " cx_sy_dyn_call_illegal_class .
+      ENDTRY.
+    ENDIF.
+
+    cl_abap_unit_assert=>assert_bound( msg = 'cannot get client proxy factory or service binding not active' act = client_proxy ).
+
+  ENDMETHOD.
+
 
   METHOD create_travel.
     " call a simple create operation and check if the data is available via EML and in the database
@@ -154,39 +179,18 @@ CLASS /dmo/tc_travel_proc_m_o2_odata  IMPLEMENTATION.
   ENDMETHOD.
 
 
-
-
-  METHOD create_local_client_proxy.
-
-    " as long as CL_WEB_ODATA_CLIENT_FACTORY is not available
-    " on all platforms, we have to use dynamic calls
-    " to avoid syntax errors
-    TRY.
-        " the Cloud version
-        DATA(class1) = 'CL_WEB_ODATA_CLIENT_FACTORY'.
-        CALL METHOD (class1)=>create_v2_local_proxy
-          EXPORTING
-            is_service_key  = service_key
-          RECEIVING
-            ro_client_proxy = client_proxy.
-      CATCH cx_root.  " cx_sy_dyn_call_illegal_class .
-    ENDTRY.
-
-    IF client_proxy IS NOT BOUND.
-      TRY.
-          " the onPrem version
-          DATA(class2) = '/IWBEP/CL_CP_CLIENT_PROXY_FACT'.
-          CALL METHOD (class2)=>create_v2_local_proxy
-            EXPORTING
-              is_service_key  = service_key
-            RECEIVING
-              ro_client_proxy = client_proxy.
-        CATCH cx_root.  " cx_sy_dyn_call_illegal_class .
-      ENDTRY.
-    ENDIF.
-
-    cl_abap_unit_assert=>assert_bound( msg = 'cannot get client proxy factory or service binding not active' act = client_proxy ).
-
+  METHOD setup.
+    sql_test_environment->clear_doubles(  ).
+    cds_test_environment->clear_doubles(  ).
+    cds_test_environment->insert_test_data( agency_mock_data     ).
+    cds_test_environment->insert_test_data( customer_mock_data   ).
+    cds_test_environment->insert_test_data( carrier_mock_data    ).
+    sql_test_environment->insert_test_data( flight_mock_data     ).
+    sql_test_environment->insert_test_data( supplement_mock_data ).
   ENDMETHOD.
 
+
+  METHOD teardown.
+    ROLLBACK ENTITIES. "#EC CI_ROLLBACK
+  ENDMETHOD.
 ENDCLASS.

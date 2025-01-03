@@ -14,7 +14,7 @@ ENDCLASS.
 
 
 
-CLASS /dmo/cl_data_generator_draft IMPLEMENTATION.
+CLASS /DMO/CL_DATA_GENERATOR_DRAFT IMPLEMENTATION.
 
 
   METHOD /dmo/if_data_generation_badi~data_generation.
@@ -103,6 +103,4 @@ CLASS /dmo/cl_data_generator_draft IMPLEMENTATION.
     ).
 
   ENDMETHOD.
-
-
 ENDCLASS.

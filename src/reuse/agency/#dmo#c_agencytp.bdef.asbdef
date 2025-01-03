@@ -1,6 +1,7 @@
 projection;
 strict(2);
 use draft;
+use side effects;
 extensible;
 
 define behavior for /DMO/C_AgencyTP alias /DMO/Agency

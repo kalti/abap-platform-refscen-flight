@@ -27,7 +27,8 @@ ENDCLASS.
 
 
 
-CLASS /dmo/zz_tc_agency_slogan IMPLEMENTATION.
+CLASS /DMO/ZZ_TC_AGENCY_SLOGAN IMPLEMENTATION.
+
 
   METHOD class_setup.
     cds_test_environment = cl_cds_test_environment=>create_for_multiple_cds(
@@ -64,6 +65,7 @@ CLASS /dmo/zz_tc_agency_slogan IMPLEMENTATION.
   METHOD teardown.
     ROLLBACK ENTITIES.                                 "#EC CI_ROLLBACK
   ENDMETHOD.
+
 
   METHOD update_on_slogan.
     CONSTANTS:
@@ -120,5 +122,4 @@ CLASS /dmo/zz_tc_agency_slogan IMPLEMENTATION.
     ).
 
   ENDMETHOD.
-
 ENDCLASS.

@@ -1,5 +1,9 @@
 CLASS /dmo/bp_booking_d DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF /dmo/r_travel_d.
+protected section.
+private section.
 ENDCLASS.
 
-CLASS /dmo/bp_booking_d IMPLEMENTATION.
+
+
+CLASS /DMO/BP_BOOKING_D IMPLEMENTATION.
 ENDCLASS.

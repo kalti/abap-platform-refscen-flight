@@ -12,7 +12,6 @@ CLASS /dmo/cl_travel_auxiliary_m DEFINITION
 ENDCLASS.
 
 
-CLASS /dmo/cl_travel_auxiliary_m IMPLEMENTATION.
 
-
+CLASS /DMO/CL_TRAVEL_AUXILIARY_M IMPLEMENTATION.
 ENDCLASS.

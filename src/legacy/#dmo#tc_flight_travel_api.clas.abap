@@ -26,7 +26,7 @@ ENDCLASS.
 
 
 
-CLASS /dmo/tc_flight_travel_api IMPLEMENTATION.
+CLASS /DMO/TC_FLIGHT_TRAVEL_API IMPLEMENTATION.
 
 
   METHOD class_setup.
@@ -73,9 +73,6 @@ CLASS /dmo/tc_flight_travel_api IMPLEMENTATION.
     ENDDO.
   ENDMETHOD.
 
-  METHOD teardown.
-    ROLLBACK WORK. "#EC CI_ROLLBACK
-  ENDMETHOD.
 
   METHOD cuerd_travel_early_numbering.
     DATA ls_travel_in  TYPE /dmo/s_travel_in.
@@ -374,5 +371,10 @@ CLASS /dmo/tc_flight_travel_api IMPLEMENTATION.
 
     " Rollback
     CALL FUNCTION '/DMO/FLIGHT_TRAVEL_INITIALIZE'.
+  ENDMETHOD.
+
+
+  METHOD teardown.
+    ROLLBACK WORK. "#EC CI_ROLLBACK
   ENDMETHOD.
 ENDCLASS.

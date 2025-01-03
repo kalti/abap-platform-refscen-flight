@@ -3,6 +3,17 @@
 
 @Search.searchable: true
 
+@AbapCatalog.viewEnhancementCategory: [ #PROJECTION_LIST ]
+@AbapCatalog.extensibility:  {
+    extensible: true,
+    dataSources: [ 'Airport' ],
+    quota: {
+        maximumBytes: 1000,
+        maximumFields: 100
+    },
+    elementSuffix: 'ZAP'
+}
+
 define view entity /DMO/I_Airport
   as select from /dmo/airport as Airport
 
