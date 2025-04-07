@@ -4,6 +4,7 @@
   <asx:values>
    <AREAT>Flight Reference Scenario: Travel API</AREAT>
    <INCLUDES>
+    <SOBJ_NAME>/DMO/LFLIGHT_TRAVEL_APITOP</SOBJ_NAME>
     <SOBJ_NAME>/DMO/SAPLFLIGHT_TRAVEL_API</SOBJ_NAME>
    </INCLUDES>
    <FUNCTIONS>

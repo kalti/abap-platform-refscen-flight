@@ -1002,7 +1002,7 @@ CLASS lcl_flight_data_generator IMPLEMENTATION.
       flight_date_max TYPE d,
       flight_date_min TYPE d.
 
-    DATA(lv_days_between) = cv_days_between_test.
+    DATA(lv_days_between) = cv_days_between_1weeks.
 
     GET TIME STAMP FIELD DATA(current_timestamp).
     DATA(tmp) = CONV string( current_timestamp ).
